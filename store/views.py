@@ -41,3 +41,4 @@ class Product(generic.ListView):
     # so Either a) send  extra_context  'category_key' to this template
     # or b) use the FK relationship between the category and products and get the related products in the template 
     context_object_name = 'products_key'
+    extra_context = {'category_key':Categories.objects.all}
