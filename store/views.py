@@ -37,4 +37,7 @@ class CategoryCreate(generic.CreateView):
 class Product(generic.ListView):
     model = Products
     template_name = 'store/all_products.html'
+    # Here we are sending only products_key context to template. There is no 'category_key' data sent to be used by main.html
+    # so Either a) send  extra_context  'category_key' to this template
+    # or b) use the FK relationship between the category and products and get the related products in the template 
     context_object_name = 'products_key'
