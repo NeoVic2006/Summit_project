@@ -4,7 +4,7 @@ from django.db.models.deletion import CASCADE
 # Create your models here.
 
 
-class Categories(models.Model):
+class Categories(models.Model): # With class name already in plural, check out how this entity in displayed in admin site
     name = CharField(max_length=50, null=False)
     description = models.CharField(max_length=2000)
 
@@ -13,7 +13,7 @@ class Categories(models.Model):
 
 
 
-class Products(models.Model):
+class Products(models.Model): # With class name already in plural, check out how this entity in displayed in admin site
     product_name = CharField(max_length=50, null=False, default=None)
     description = models.CharField(max_length=2000, default=None)
     picture = CharField(max_length=2000, default=None) # try to make a imagefield 
