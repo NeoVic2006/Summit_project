@@ -25,6 +25,7 @@ class CategoryDetail(generic.DetailView):
     template_name = 'store/category_detail.html'
     extra_context = {'category_key':Category.objects.all, 
                      'product_key':Product.objects.filter(category_id=2)}      # how to add proper filter for choosen category. I need help with this 
+    # you receive slug here in the url. So use the category slug value to filter the products like Product.objects.filter(category__slug=slug)
 
 
 class CategoryCreate(generic.CreateView):
