@@ -24,7 +24,7 @@ class CategoryDetail(generic.DetailView):
     model = Category
     template_name = 'store/category_detail.html'
     extra_context = {'category_key':Category.objects.all, 
-                     'product_key':Product.objects.filter(category_id=2)}      # how to add proper filter for choosen category. 
+                     'product_key':Product.objects.filter(category_id=2)}      # how to add proper filter for choosen category. I need help with this 
 
 
 class CategoryCreate(generic.CreateView):
