@@ -1,15 +1,15 @@
 from django.contrib import admin
 from django.urls import path, re_path
-from store.views import Category, CategoryUpdate, CategoryDetail, CategoryCreate, Product
+from store.views import Categories, CategoryUpdate, CategoryDetail, CategoryCreate, Products
 
 
 app_name ='store'
 urlpatterns = [
-    path('', Category.as_view(), name='list_category'),  
-    path('<int:pk>/', CategoryDetail.as_view(), name='category_details'),  
-    path('create/', CategoryCreate.as_view(), name='category_create'),         
+    path('', Categories.as_view(), name='list_category'),  
+    path('create/', CategoryCreate.as_view(), name='category_create'),           
     re_path(r'^(?P<pk>\d+)/update/$', CategoryUpdate.as_view(), name='category_update'),
-
+    path('products/', Products.as_view(), name='list_products'), 
+    path('<slug:slug>/', CategoryDetail.as_view(), name='category_details'),  
     #re_path('<str:category_name>/',)
-    path('products/', Product.as_view(), name='list_products'), 
+    
 ]

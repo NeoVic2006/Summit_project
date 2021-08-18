@@ -6,16 +6,16 @@
     </head>
 
     <body>
-        <a href="{% url 'store:list_category' %}">My Store</a>  
+        <a href="{% url 'store:list_category' %}">My Store<a>  
         <br>Categories:</br>  
 
-        <br>{% if category_key %}
-            {% for category in category_key %}
-                <li>{{ category.name }}</li>
-            {% endfor %}
-        {% endif %}</br>  
+            <br>{% if category_key %}
+                {% for category in category_key %}
+                    <li><a href="{% url 'store:category_details' category.name %}">{{ category.name }}</li>       
+                {% endfor %}
+            {% endif %}</br>  
 
-        <br>Products:</br>  
+        <a>Products:<a>  
 
         {% block content %}
         
@@ -23,3 +23,4 @@
         
     </body>
 </html>     
+

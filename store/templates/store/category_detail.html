@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<htnk lang="eg">
-<head>
-    <meta charset="UTF-8">
-    <title>Category</title>
-</head>
+{% extends 'store/main.html'%}
 
-<body>
+{% block content %}  
+
     <p>{{ object.name }}</p>
     <p>{{ object.description }}</p>
-</body>
-</html>
+    <p>{{ product_key }}</p>
+
+    
+
+{% endblock content %}
