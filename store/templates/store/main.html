@@ -16,9 +16,15 @@
             {% endif %}</br>  
 
         <a>Products:<a>  
-
-        {% block content %}
         
+        {% block content %}
+
+            <br>{% if product_key %}
+                {% for product in product_key %}
+                    <li> {{ product.product_name }} {{ product.description }} {{ product.price }}</li>       
+                {% endfor %}
+            {% endif %}</br> 
+
         {% endblock content %}
         
     </body>

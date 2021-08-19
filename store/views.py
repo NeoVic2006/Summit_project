@@ -1,3 +1,4 @@
+from django.db.models.fields import SlugField
 from django.shortcuts import render
 from django.views import generic
 from store.models import Category, Product
@@ -6,11 +7,19 @@ from django.urls.base import reverse_lazy
 # Create your views here.
 
 
+class User():
+    pass
+
 
 class Categories(generic.ListView):
     model = Category
     template_name = 'store/main.html'
     context_object_name = 'category_key'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({'product_key': Product.objects.all})
+        return context
 
 
 class CategoryUpdate(generic.UpdateView):
@@ -23,9 +32,17 @@ class CategoryUpdate(generic.UpdateView):
 class CategoryDetail(generic.DetailView):
     model = Category
     template_name = 'store/category_detail.html'
-    extra_context = {'category_key':Category.objects.all, 
-                     'product_key':Product.objects.filter(category_id=2)}      # how to add proper filter for choosen category. I need help with this 
-    # you receive slug here in the url. So use the category slug value to filter the products like Product.objects.filter(category__slug=slug)
+    # extra_context = {'category_key':Category.objects.all, 
+    #                  'product_key':Product.objects.filter(category__slug=test)}   # how to add proper filter for choosen category. I need help with this 
+
+
+    def get_context_data(self, **kwargs):
+        for x, y in kwargs.items():
+            name = y
+        context = super().get_context_data(**kwargs)
+        context.update({'category_key': Category.objects.all})
+        context.update({'product_key': Product.objects.filter(category__slug=name)})
+        return context
 
 
 class CategoryCreate(generic.CreateView):
