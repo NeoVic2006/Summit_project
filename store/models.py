@@ -21,7 +21,7 @@ class Category(models.Model):
 class Product(models.Model): 
     product_name = CharField(max_length=50, null=False, default=None)
     description = models.CharField(max_length=2000, default=None)
-    picture = CharField(max_length=2000, default=None) # try to make a imagefield 
+    picture = models.ImageField(null=False) 
     price = DecimalField(decimal_places=2, max_digits=5, default=0)
     category = models.ForeignKey(Category, on_delete=CASCADE, default=1)
 

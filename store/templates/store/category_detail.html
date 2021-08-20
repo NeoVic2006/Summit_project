@@ -4,7 +4,8 @@
 
     <br>{% if product_key %}
         {% for product in product_key %}
-            <li> {{ product.product_name }} {{ product.description }} {{ product.price }}</li>       
+            <img src="{{ product.picture.url }}"> 
+            <li>{{ product.product_name }} {{ product.description }}  {{ product.price }} {{ product.price }}</li>      
         {% endfor %}
     {% endif %}</br>  
 

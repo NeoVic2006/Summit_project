@@ -1,14 +1,22 @@
-from django.db.models.fields import SlugField
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render
 from django.views import generic
 from store.models import Category, Product
-from store.forms import CategoryForm
+from store.forms import CategoryForm, CreateUserForm
 from django.urls.base import reverse_lazy
 # Create your views here.
 
 
-class User():
-    pass
+# def registerPage(request):
+#     form = CreateUserForm()
+
+#     if request.method == 'POST':
+#         form = CreateUserForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+
+#     context = {'form':form}
+#     return render(request, 'register.html', context)
 
 
 class Categories(generic.ListView):
