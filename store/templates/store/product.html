@@ -1,0 +1,30 @@
+
+{% extends 'store/main.html'%}
+
+{% block content %}  
+
+
+
+<br><img src="{{ product.picture.url }}"> <br>
+<li>{{ product.product_name }} {{ product.description }} {{ product.price }} </li>  
+
+<br><button type="button" id="add-button" {{product.id}} class="btn btn-secondary btn-sm">Add to Cart</button></br>
+
+<script>
+    $(documnet).on('click', '#add-button', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '{% url 'store:cart_add' %}',
+            data: {
+                productid: $('#add-button').val(),
+                csrfmiddlewaretoken: "{{csrt_token}}",
+                action: 'post'
+                }
+            success: function (json) {},
+            error: function (xhr, errmsg, err) {}
+        });
+    })
+</script>
+{% endblock content %}
+

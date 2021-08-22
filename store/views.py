@@ -1,22 +1,46 @@
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views import generic
 from store.models import Category, Product
 from store.forms import CategoryForm, CreateUserForm
 from django.urls.base import reverse_lazy
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 # Create your views here.
 
 
-# def registerPage(request):
-#     form = CreateUserForm()
+def cart_summary(request):
+    return render(request, 'store/cart/summary.html')
 
-#     if request.method == 'POST':
-#         form = CreateUserForm(request.POST)
-#         if form.is_valid():
-#             form.save()
 
-#     context = {'form':form}
-#     return render(request, 'register.html', context)
+def cart_add(request):
+    cart = Cart(request)
+    if request.POST.get('action') == 'post':
+         product_id = int(request.POST.get('productid'))
+         product = get_object_or_404(Product, id=product_id)
+         cart.add(product=product)
+         response = JsonResponse({'test':'data'})
+         print(response)
+         return response
+
+
+class Cart():
+    def __init__(self, request):
+        self.session = request.session
+        cart = self.session.get('session_key')
+        if 'session_key' not in request.session:
+            cart = self.session['session_key'] = {}
+        self.cart = cart
+
+    def add(self, product):
+        product_id = product.id
+        if product_id not in self.cart:
+            self.cart[product_id] = {'price': str(product.price)}
+        self.session.modified = True
+
+
+
 
 
 class Categories(generic.ListView):
@@ -60,10 +84,14 @@ class CategoryCreate(generic.CreateView):
     success_url = reverse_lazy('store:list_category')
 
 
-
-
-class Products(generic.ListView):
+class Products(generic.DetailView):
     model = Product
-    template_name = 'store/all_products.html'
-    context_object_name = 'products_key'
-    extra_context = {'category_key':Category.objects.all}
+    template_name = 'store/product.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({'category_key': Category.objects.all})
+        context.update({'product_key': Product.objects.filter(pk=self.kwargs.get('pk'))})
+        return context
+
+

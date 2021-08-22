@@ -2,11 +2,11 @@
 
 {% block content %}  
 
-    <br>{% if product_key %}
-        {% for product in product_key %}
-            <img src="{{ product.picture.url }}"> 
-            <li>{{ product.product_name }} {{ product.description }}  {{ product.price }} {{ product.price }}</li>      
-        {% endfor %}
-    {% endif %}</br>  
+        <br>{% if product_key %}
+            {% for product in product_key %}
+                <img src="{{ product.picture.url }}"> 
+                <li><a href="{% url 'store:product' product.id %}">{{ product.product_name }}</li>      
+            {% endfor %}
+        {% endif %}</br> 
 
 {% endblock content %}
