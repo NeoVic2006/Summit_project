@@ -7,22 +7,25 @@ from django.urls.base import reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from decimal import Decimal
 # Create your views here.
 
 
 def cart_summary(request):
-    return render(request, 'store/cart/summary.html')
+    cart = Cart(request)
+    return render(request, 'store/cart/summary.html', {'cart': cart})
 
 
 def cart_add(request):
-    cart = Cart(request)
+    cart = Cart(request) 
     if request.POST.get('action') == 'post':
-         product_id = int(request.POST.get('productid'))
-         product = get_object_or_404(Product, id=product_id)
-         cart.add(product=product)
-         response = JsonResponse({'test':'data'})
-         print(response)
-         return response
+        product_id = int(request.POST.get('productid'))
+        product_qty = int(request.POST.get('productqty'))
+        product = get_object_or_404(Product, id=product_id)
+        cart.add(product=product, qty=product_qty)
+        cart_qty = cart.__len__()
+        response = JsonResponse({'qty': cart_qty})
+        return response
 
 
 class Cart():
@@ -33,12 +36,30 @@ class Cart():
             cart = self.session['session_key'] = {}
         self.cart = cart
 
-    def add(self, product):
+    def add(self, product, qty):
         product_id = product.id
         if product_id not in self.cart:
-            self.cart[product_id] = {'price': str(product.price)}
+            self.cart[product_id] = {'price': str(product.price), 'qty': int(qty)}
         self.session.modified = True
 
+    def __iter__(self):
+        product_ids = self.cart.keys()
+        products = Product.products.filter(id__in=product_ids)
+        cart = self.cart.copy()
+
+        for product in products:
+            cart[str(product.id)]['product'] = product
+
+        for item in cart.values():
+            item['price'] = Decimal(item['price'])
+            item['total_price'] = item['price'] * item['qty']
+            yield item
+            
+    def __len__(self):
+        """
+        Get basket data and count qty of items
+        """
+        return sum(item['qty'] for item in self.cart.values())
 
 
 

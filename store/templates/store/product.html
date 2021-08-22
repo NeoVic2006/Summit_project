@@ -3,25 +3,35 @@
 
 {% block content %}  
 
-
+<br><label for="select">Qty</label>
+<select id='select'>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+</select></br>
 
 <br><img src="{{ product.picture.url }}"> <br>
 <li>{{ product.product_name }} {{ product.description }} {{ product.price }} </li>  
 
-<br><button type="button" id="add-button" {{product.id}} class="btn btn-secondary btn-sm">Add to Cart</button></br>
+<br><button type="button" id="add-button" value="{{product.id}}" class="btn btn-secondary btn-sm">Add to Cart</button></br>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
-    $(documnet).on('click', '#add-button', function (e) {
+    $(document).on('click', '#add-button', function (e) {
         e.preventDefault();
         $.ajax({
             type: 'POST',
-            url: '{% url 'store:cart_add' %}',
+            url: '{% url "store:cart_add" %}',
             data: {
                 productid: $('#add-button').val(),
-                csrfmiddlewaretoken: "{{csrt_token}}",
+                productqty: $('#select option:selected').text(),
+                csrfmiddlewaretoken: '{{ csrf_token }}',
                 action: 'post'
-                }
-            success: function (json) {},
+                },
+            success: function (json) {
+                document.getElementById("cart-qty").innerHTML = json.qty
+            },
             error: function (xhr, errmsg, err) {}
         });
     })
