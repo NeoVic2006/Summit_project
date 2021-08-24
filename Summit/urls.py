@@ -10,8 +10,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('blogs/', include('blog.urls')),
-    path('store/', include('store.urls')),
+    path('blogs/', include('blog.urls'), name='blog_url'),
+    path('store/', include('store.urls'), name='store_url'),
     
     #path('api/blogs/', views.apibloglist),  # with function 
     path('api/blogs/', views.APIBlogList.as_view()),  # with class

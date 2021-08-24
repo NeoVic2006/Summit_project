@@ -1,0 +1,12 @@
+*.egg-info
+__pycache__
+dist/
+*.pyc
+.venv/
+venv/
+.pytest_cache
+.coverage
+coverage.xml
+htmlcov
+.coveragerc
+notes.txt

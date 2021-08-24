@@ -34,3 +34,10 @@
     git pull %remotename% %branchname%
 
     git pull origin %branchname% --allow-unrelated-histories     // If you see error: "fatal: refusing to merge unrelated histories"
+
+
+
+4) Pytests:
+    ctrl shift P -> then type "test" choose proper settings for integration of VCS tests to project
+    
+    pytest --cov=. --cov-report=html   # Creating folder with report. Clock on index.html and you can see all details about tests. 

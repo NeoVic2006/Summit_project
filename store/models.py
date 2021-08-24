@@ -34,7 +34,7 @@ class Product(models.Model):
     description = models.CharField(max_length=2000, default=None)
     picture = models.ImageField(null=False) 
     price = DecimalField(decimal_places=2, max_digits=5, default=0)
-    category = models.ForeignKey(Category, on_delete=CASCADE, default=1)
+    category = models.ForeignKey(Category, on_delete=CASCADE)
     inventory = models.IntegerField(default=0)
 
     def has_inventory(self):
