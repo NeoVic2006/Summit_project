@@ -4,7 +4,6 @@ from django.test import TestCase
 
 from store.models import Product, Category, Order
 from mixer.backend.django import mixer
-import pytest
 
 
 class TestModelCategory(TestCase):
