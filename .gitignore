@@ -10,3 +10,6 @@ coverage.xml
 htmlcov
 .coveragerc
 notes.txt
+
+store_venv/
+error.log
