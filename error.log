@@ -1,0 +1,17 @@
+[Wed Aug 25 23:29:43.083324 2021] [mpm_event:notice] [pid 8241:tid 139674674658240] AH00489: Apache/2.4.29 (Ubuntu) configured -- resuming normal operations
+[Wed Aug 25 23:29:43.085153 2021] [core:notice] [pid 8241:tid 139674674658240] AH00094: Command line: '/usr/sbin/apache2'
+[Wed Aug 25 23:30:04.490129 2021] [mpm_event:notice] [pid 8241:tid 139674674658240] AH00491: caught SIGTERM, shutting down
+[Wed Aug 25 23:30:04.593218 2021] [mpm_event:notice] [pid 8855:tid 139986266102720] AH00489: Apache/2.4.29 (Ubuntu) mod_wsgi/4.5.17 Python/2.7 configured -- resuming normal operations
+[Wed Aug 25 23:30:04.593346 2021] [core:notice] [pid 8855:tid 139986266102720] AH00094: Command line: '/usr/sbin/apache2'
+[Wed Aug 25 23:35:59.393233 2021] [mpm_event:notice] [pid 8855:tid 139986266102720] AH00491: caught SIGTERM, shutting down
+[Wed Aug 25 23:35:59.485844 2021] [mpm_event:notice] [pid 9567:tid 139744440409024] AH00489: Apache/2.4.29 (Ubuntu) mod_wsgi/4.5.17 Python/2.7 configured -- resuming normal operations
+[Wed Aug 25 23:35:59.485952 2021] [core:notice] [pid 9567:tid 139744440409024] AH00094: Command line: '/usr/sbin/apache2'
+[Wed Aug 25 23:36:11.747450 2021] [wsgi:error] [pid 9570:tid 139744290965248] [client 65.28.168.140:57100] mod_wsgi (pid=9570): Target WSGI script '/var/www/TestProject/TestProject/wsgi.py' cannot be loaded as Python module.
+[Wed Aug 25 23:36:11.747503 2021] [wsgi:error] [pid 9570:tid 139744290965248] [client 65.28.168.140:57100] mod_wsgi (pid=9570): Exception occurred processing WSGI script '/var/www/TestProject/TestProject/wsgi.py'.
+[Wed Aug 25 23:36:11.747519 2021] [wsgi:error] [pid 9570:tid 139744290965248] [client 65.28.168.140:57100] Traceback (most recent call last):
+[Wed Aug 25 23:36:11.747534 2021] [wsgi:error] [pid 9570:tid 139744290965248] [client 65.28.168.140:57100]   File "/var/www/TestProject/TestProject/wsgi.py", line 12, in <module>
+[Wed Aug 25 23:36:11.747585 2021] [wsgi:error] [pid 9570:tid 139744290965248] [client 65.28.168.140:57100]     from django.core.wsgi import get_wsgi_application
+[Wed Aug 25 23:36:11.747601 2021] [wsgi:error] [pid 9570:tid 139744290965248] [client 65.28.168.140:57100] ImportError: No module named django.core.wsgi
+[Wed Aug 25 23:36:25.126680 2021] [mpm_event:notice] [pid 9567:tid 139744440409024] AH00491: caught SIGTERM, shutting down
+[Wed Aug 25 23:36:25.219654 2021] [mpm_event:notice] [pid 9654:tid 140100835449792] AH00489: Apache/2.4.29 (Ubuntu) mod_wsgi/4.5.17 Python/2.7 configured -- resuming normal operations
+[Wed Aug 25 23:36:25.219765 2021] [core:notice] [pid 9654:tid 140100835449792] AH00094: Command line: '/usr/sbin/apache2'
