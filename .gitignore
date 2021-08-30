@@ -11,5 +11,6 @@ htmlcov
 .coveragerc
 notes.txt
 
-store_venv/
+env/
+
 error.log
