@@ -12,6 +12,9 @@ from decimal import Decimal
 
 
 def cart_summary(request):
+    print(request.session.get('session_key'))
+    # for x in request.META:
+    #     print(x)
     cart = Cart(request)
     return render(request, 'store/cart/summary.html', {'cart': cart})
 
@@ -69,10 +72,12 @@ class Categories(generic.ListView):
     template_name = 'store/main.html'
     context_object_name = 'category_key'
 
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update({'product_key': Product.objects.all})
         return context
+
 
 
 class CategoryUpdate(generic.UpdateView):
@@ -110,6 +115,7 @@ class Products(generic.DetailView):
     template_name = 'store/product.html'
 
     def get_context_data(self, **kwargs):
+        print("#############################")
         context = super().get_context_data(**kwargs)
         context.update({'category_key': Category.objects.all})
         context.update({'product_key': Product.objects.filter(pk=self.kwargs.get('pk'))})
